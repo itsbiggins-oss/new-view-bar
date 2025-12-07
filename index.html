@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New View Bar & Grill | Highview's Home Bar Since 1983</title>
+    <meta name="description" content="New View Bar & Grill: Highview's favorite neighborhood hangout since 1983. Home of the Blue Light Special, great food, karaoke, pool, and open late until 4 AM. Cash only.">
+    
+    <meta property="og:title" content="New View Bar & Grill | Highview's Home Bar">
+    <meta property="og:description" content="Good food, cold drinks, late nights. Open until 4 AM daily.">
+    <meta property="og:type" content="restaurant">
+    <link rel="canonical" href="https://yourwebsite.com">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BarOrPub",
+        "name": "New View Bar & Grill",
+        "image": "logo.png",
+        "telephone": "+15022311793",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "7601 Outer Loop",
+            "addressLocality": "Louisville",
+            "addressRegion": "KY",
+            "postalCode": "40228",
+            "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "11:00",
+                "closes": "04:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Sunday",
+                "opens": "13:00",
+                "closes": "04:00"
+            }
+        ],
+        "priceRange": "$$",
+        "servesCuisine": "American",
+        "paymentAccepted": "Cash only"
+    }
+    </script>
+
+    <style>
+        /* =========================================
+           1. CORE STYLES & VARIABLES
+           ========================================= */
+        :root {
+            --primary-green: #0A3F2E;
+            --bg-cream: #F5F1E6;
+            --accent-gold: #C5A059;
+            --retro-blue: #89CFF0;
+            
+            --text-dark: #1F2923;
+            --text-light: #FFFFFF;
+            --text-grey: #5C5C5C;
+            
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+        }
+
+        a { 
+            text-decoration: none; 
+            color: inherit; 
+            transition: all 0.3s ease;
+        }
+
+        a:focus {
+            outline: 2px solid var(--accent-gold);
+            outline-offset: 2px;
+        }
+
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-gold);
+            color: var(--primary-green);
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* =========================================
+           2. UTILITY CLASSES
+           ========================================= */
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--primary-green);
+            font-weight: 800;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            border: 2px solid var(--accent-gold);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover, .btn:focus {
+            background-color: transparent;
+            color: var(--accent-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--text-light);
+            color: var(--text-light);
+        }
+
+        .btn-outline:hover, .btn-outline:focus {
+            background-color: var(--text-light);
+            color: var(--primary-green);
+        }
+
+        .section-padding { padding: 60px 0; }
+        .text-center { text-align: center; }
+        
+        /* =========================================
+           3. HEADER & NAV
+           ========================================= */
+        header {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-link img {
+            height: 75px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-link:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .menu-toggle:focus {
+            outline: 2px solid var(--accent-gold);
+        }
+
+        /* Nav Link Styles */
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        nav a:hover, nav a:focus { 
+            color: var(--accent-gold);
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--primary-green);
+                padding: 80px 20px 20px;
+                transition: right 0.3s ease;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+            }
+
+            nav.active {
+                right: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            nav a {
+                display: block;
+                padding: 15px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .nav-container {
+                padding: 5px 0;
+            }
+        }
+
+        /* =========================================
+           4. HERO SECTION
+           ========================================= */
+        #hero {
+            background-color: var(--primary-green);
+            background-image: linear-gradient(rgba(10, 63, 46, 0.85), rgba(10, 63, 46, 0.95)); 
+            color: var(--text-light);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        #hero h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
+        }
+
+        #hero p.lead {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin-bottom: 30px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-info {
+            font-size: 0.9rem;
+            margin-top: 20px;
+            opacity: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hero-info a {
+            text-decoration: underline;
+        }
+
+        .hero-info a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* =========================================
+           5. BLUE LIGHT SPECIAL (WITH IMAGE)
+           ========================================= */
+        #bluelight {
+            background-color: white; 
+            padding: 60px 0;
+            border-top: 2px solid var(--accent-gold);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .special-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .special-header {
+            margin-bottom: 40px;
+        }
+
+        .special-title {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            /* Flex removed so title is centered under image block */
+        }
+
+        /* The styles for the uploaded siren image */
+        .siren-feature {
+            width: 150px;
+            height: auto;
+            display: block;
+            margin: 0 auto 10px; /* Centers the image */
+            animation: siren-pulse 0.8s infinite alternate; /* The flash animation */
+        }
+
+        @keyframes siren-pulse {
+            0% { 
+                transform: scale(1); 
+                filter: drop-shadow(0 0 5px rgba(0,200,255,0.3)) brightness(1); 
+            }
+            100% { 
+                transform: scale(1.05); 
+                filter: drop-shadow(0 0 25px rgba(0,200,255,0.8)) brightness(1.2); 
+            }
+        }
+
+        .special-rules {
+            background-color: var(--bg-cream);
+            border: 2px dashed var(--primary-green);
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        .special-rules h3 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 5px;
+        }
+
+        .special-rules p {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+
+        .special-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .special-card {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            padding: 25px;
+            border-radius: 8px;
+            border: 2px solid var(--primary-green);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .special-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--accent-gold);
+        }
+
+        .special-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .special-price {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--accent-gold);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .special-item {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .special-sub {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        /* =========================================
+           6. ABOUT SECTION
+           ========================================= */
+        #about {
+            background-color: white;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content h2 {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-grey);
+        }
+
+        /* =========================================
+           7. MENU SECTION
+           ========================================= */
+        #menu {
+            background-color: var(--bg-cream);
+        }
+
+        #menu h2 {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .menu-intro {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.05rem;
+            color: var(--text-grey);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-category {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--primary-green);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .menu-category h3 {
+            font-size: 1.3rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-gold);
+        }
+
+        .menu-item {
+            margin: 15px 0;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .menu-item strong {
+            display: block;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+        }
+
+        .menu-item span {
+            color: var(--text-grey);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           8. NIGHTLIFE SECTION
+           ========================================= */
+        #nightlife {
+            background-color: white;
+        }
+
+        #nightlife h2 {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        #nightlife > .container > p {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-grey);
+            margin-bottom: 40px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-box {
+            background-color: var(--bg-cream);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid var(--accent-gold);
+            transition: all 0.3s ease;
+        }
+
+        .feature-box:hover {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .feature-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-green);
+        }
+
+        .feature-box:hover h3 {
+            color: var(--accent-gold);
+        }
+
+        .feature-box p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* =========================================
+           9. CASH ONLY SECTION
+           ========================================= */
+        #cash-only {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .cash-badge {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--primary-green);
+            font-weight: 800;
+            font-size: 1.5rem;
+            padding: 10px 30px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 3px solid var(--text-light);
+        }
+
+        #cash-only h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        #cash-only p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* =========================================
+           10. REVIEWS SECTION
+           ========================================= */
+        #reviews {
+            background-color: var(--bg-cream);
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent-gold);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+            border-left-width: 6px;
+        }
+
+        .review-card p {
+            font-style: italic;
+            color: var(--text-grey);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .review-author {
+            text-align: right;
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        /* =========================================
+           11. FOOTER
+           ========================================= */
+        footer {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            padding: 40px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h4 {
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent-gold);
+            text-decoration: underline;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 200px;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .map-container iframe {
+            border: 0;
+        }
+        
+        .copyright {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+
+        .copyright p {
+            margin: 5px 0;
+        }
+
+        /* =========================================
+           12. RESPONSIVE ADJUSTMENTS
+           ========================================= */
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 40px 0;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .special-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .special-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .special-card {
+                padding: 15px;
+            }
+
+            .menu-grid,
+            .features-grid,
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        /* =========================================
+           13. ACCESSIBILITY & ANIMATIONS
+           ========================================= */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus visible for keyboard navigation */
+        *:focus-visible {
+            outline: 3px solid var(--accent-gold);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header role="banner">
+        <div class="container nav-container">
+            <a href="#hero" class="logo-link" aria-label="New View Bar & Grill Home">
+                <img src="logo.png" alt="New View Bar & Grill Logo" width="150" height="75">
+            </a>
+            
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                ☰
+            </button>
+
+            <nav role="navigation" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#about">Our Story</a></li>
+                    <li><a href="#menu">Food & Drink</a></li>
+                    <li><a href="#nightlife">Karaoke & Pool</a></li>
+                    <li><a href="#visit">Visit Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section id="hero" aria-labelledby="hero-heading">
+            <div class="container">
+                <img src="logo.png" alt="New View Bar & Grill - Highview's Home Bar" loading="eager" style="width: 100%; max-width: 500px; margin: 0 auto 20px;">
+                
+                <h1 id="hero-heading">Highview's Home Bar Since 1983</h1>
+                <p class="lead">Good food, cold drinks, late nights, and local people.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn">View Menu</a>
+                    <a href="#visit" class="btn btn-outline">Get Directions</a>
+                </div>
+
+                <div class="hero-info">
+                    <span>📍 7601 Outer Loop</span>
+                    <span>📞 <a href="tel:5022311793">(502) 231-1793</a></span>
+                    <span>🕒 Open Daily 'til 4 AM</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="bluelight" aria-labelledby="bluelight-heading">
+            <div class="container special-container">
+                
+                <div class="special-header">
+                    <img src="blue-light.png" alt="Blue Light Special Siren" class="siren-feature">
+                    
+                    <h2 id="bluelight-heading" class="special-title">
+                        The Famous Blue Light Special
+                    </h2>
+                    <p>When the light spins, the prices drop. You have to be quick!</p>
+                </div>
+
+                <div class="special-rules">
+                    <h3>The Rules</h3>
+                    <p>For 9 Minutes Every Hour</p>
+                    <p style="font-size: 0.9rem; margin-top: 5px; color: var(--text-grey);">
+                        Start Times: 1:15 PM • 2:15 PM • 3:15 PM • 4:15 PM • 5:15 PM
+                    </p>
+                </div>
+                
+                <div class="special-grid">
+                    <div class="special-card">
+                        <div class="special-price">$1.00</div>
+                        <div class="special-item">Off</div>
+                        <div class="special-sub">Well Drinks</div>
+                    </div>
+                    
+                    <div class="special-card">
+                        <div class="special-price">$2.00</div>
+                        <div class="special-item">Domestics</div>
+                        <div class="special-sub">Bottles</div>
+                    </div>
+                    
+                    <div class="special-card">
+                        <div class="special-price">$3.50</div>
+                        <div class="special-item">Craft</div>
+                        <div class="special-sub">Drafts</div>
+                    </div>
+                    
+                    <div class="special-card">
+                        <div class="special-price">💥</div>
+                        <div class="special-item">Specialty</div>
+                        <div class="special-sub">Shots</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="about" class="section-padding" aria-labelledby="about-heading">
+            <div class="container about-content">
+                <h2 id="about-heading">Welcome Home</h2>
+                <p>For over 40 years, New View Bar & Grill has been the heartbeat of Highview. We aren't trying to be a fancy gastropub or a corporate chain. We are a true neighborhood bar.</p>
+                <br>
+                <p>Locally owned and operated by Jamie Spaulding, New View is built on simple values: treat people right, pour a cold drink, and serve food that actually hits the spot. Whether you're a regular who has their own seat at the bar or a first-timer looking for a game of pool, you're welcome here.</p>
+            </div>
+        </section>
+
+        <section id="menu" class="section-padding" aria-labelledby="menu-heading">
+            <div class="container">
+                <h2 id="menu-heading">Food That Hits The Spot</h2>
+                <p class="menu-intro">Our kitchen stays open late (serving until close to 4 AM!) because we know good times don't stop at dinner time. We're known for generous portions, fair prices, and food that's better than your average bar fare.</p>
+                
+                <div class="menu-grid">
+                    <article class="menu-category">
+                        <h3>Local Legends</h3>
+                        <div class="menu-item">
+                            <strong>Hand-Breaded Icelandic Cod</strong>
+                            <span>The star of the show. Available as a massive sandwich or a full dinner. Locals swear it's the best fish in the Ville.</span>
+                        </div>
+                        <div class="menu-item">
+                            <strong>Liver & Onions (First Thursdays)</strong>
+                            <span>A cult favorite. Served with sides on the first Thursday of every month. Get here early!</span>
+                        </div>
+                    </article>
+
+                    <article class="menu-category">
+                        <h3>Burgers & Sandwiches</h3>
+                        <div class="menu-item">
+                            <strong>Half-Pound Burger</strong>
+                            <span>Juicy, flame-grilled, and piled high with toppings.</span>
+                        </div>
+                        <div class="menu-item">
+                            <strong>Classic Bar Sandwiches</strong>
+                            <span>From BLTs to Club sandwiches, served with chips or fries.</span>
+                        </div>
+                    </article>
+
+                    <article class="menu-category">
+                        <h3>Bar Favorites</h3>
+                        <div class="menu-item">
+                            <strong>The Fryer Lineup</strong>
+                            <span>Wings, Fried Pickles, Chicken Tenders, and Loaded Tots.</span>
+                        </div>
+                        <div class="menu-item">
+                            <strong>Comfort Dinners</strong>
+                            <span>Homemade Meatloaf, Shrimp Dinners, and Taco Specials.</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="nightlife" class="section-padding" aria-labelledby="nightlife-heading">
+            <div class="container">
+                <h2 id="nightlife-heading">Nights at The New View</h2>
+                <p>We are open until 4 AM every single night.</p>
+
+                <div class="features-grid">
+                    <article class="feature-box">
+                        <h3>🎤 Karaoke</h3>
+                        <p>Bring your song to the mic. We host karaoke most nights of the week. The crowd is friendly, and the vibe is electric.</p>
+                    </article>
+                    <article class="feature-box">
+                        <h3>🎱 Billiards</h3>
+                        <p>We take pool seriously. We have 4 pristine DIAMOND pool tables, perfect for league play or a friendly game with friends.</p>
+                    </article>
+                    <article class="feature-box">
+                        <h3>🍺 The Patio</h3>
+                        <p>Our large, fenced outdoor patio is the perfect spot to cool off, smoke, or just hang out under the stars.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="cash-only" aria-labelledby="cash-heading">
+            <div class="container">
+                <div class="cash-badge">CASH ONLY</div>
+                <h3 id="cash-heading">Keeping It Old School</h3>
+                <p style="max-width: 700px; margin: 0 auto;">To keep our prices fair, our portions huge, and our vibe authentic, New View is a cash-only establishment. <br><strong>Don't worry—we have an ATM right on site.</strong></p>
+            </div>
+        </section>
+
+        <section id="reviews" class="section-padding" aria-labelledby="reviews-heading">
+            <div class="container">
+                <h2 id="reviews-heading" class="text-center" style="margin-bottom: 40px; color: var(--primary-green);">What The Locals Say</h2>
+                <div class="review-grid">
+                    <article class="review-card">
+                        <p>"Great people, great vibe. New View is our new regular spot. Always feel welcome and the bartenders are top notch."</p>
+                        <div class="review-author">— Deanna M.</div>
+                    </article>
+                    <article class="review-card">
+                        <p>"Seriously, the best fish sandwich in Louisville. It's huge, crispy, and perfectly cooked. A must-try!"</p>
+                        <div class="review-author">— Brian D.</div>
+                    </article>
+                    <article class="review-card">
+                        <p>"Cold beer, good conversation, and no drama. Just a classic neighborhood bar. Open late is a huge plus."</p>
+                        <div class="review-author">— Chris R.</div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="visit" role="contentinfo" aria-labelledby="footer-heading">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 id="footer-heading">New View Bar & Grill</h4>
+                    <address style="font-style: normal;">
+                        <p>7601 Outer Loop<br>Louisville, KY 40228</p>
+                        <p><a href="tel:5022311793">(502) 231-1793</a></p>
+                    </address>
+                    <p style="margin-top: 15px;">
+                        <a href="https://www.facebook.com/newviewbargrill/" target="_blank" rel="noopener noreferrer">Find us on Facebook</a>
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Hours</h4>
+                    <p><strong>Mon - Sat:</strong> 11:00 AM – 4:00 AM</p>
+                    <p><strong>Sunday:</strong> 1:00 PM – 4:00 AM</p>
+                    <p style="color: var(--accent-gold); margin-top: 10px;">Kitchen Open Late</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Directions</h4>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3137.649635760088!2d-85.61782292361668!3d38.148149891244365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88690b2716182e1b%3A0xe542c3359d95958!2sNew%20View%20Bar%20and%20Grill!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="New View Bar & Grill Location Map"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2025 New View Bar & Grill. All rights reserved.</p>
+                <p style="font-size: 0.8rem; opacity: 0.7;">Highview's Favorite Hangout.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        
+        menuToggle.addEventListener('click', () => {
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+            nav.classList.toggle('active');
+            menuToggle.textContent = nav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close mobile menu when clicking a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.textContent = '☰';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && !menuToggle.contains(e.target) && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuToggle.textContent = '☰';
+            }
+        });
+    </script>
+</body>
+</html>
