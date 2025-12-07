@@ -737,12 +737,18 @@
             text-decoration: underline;
         }
 
+        /* Center the Hours column */
+        .footer-col:last-child {
+            text-align: center;
+        }
+
         .map-container {
             width: 100%;
-            height: 200px;
+            height: 300px;
             border-radius: 4px;
             overflow: hidden;
             border: 2px solid var(--accent-gold);
+            margin-bottom: 20px;
         }
 
         .map-container iframe {
@@ -794,6 +800,12 @@
             .footer-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
+            }
+
+            /* Stack gaming logos on mobile */
+            .footer-col > div[style*="display: flex"] {
+                flex-direction: column !important;
+                gap: 15px !important;
             }
         }
 
@@ -1016,13 +1028,7 @@
                         <a href="https://www.facebook.com/newviewbargrill/" target="_blank" rel="noopener noreferrer">Find us on Facebook</a>
                     </p>
                 </div>
-
-                <div class="footer-col">
-                    <h4>Hours</h4>
-                    <p>Mon–Sat: 11:00 AM – 4:00 AM</p>
-                    <p>Sun: 1:00 PM – 4:00 AM</p>
-                </div>
-
+                
                 <div class="footer-col">
                     <h4>Get in Touch</h4>
                     <p>Email: <a href="mailto:info@newviewbargrill.com">info@newviewbargrill.com</a></p>
@@ -1031,22 +1037,32 @@
                 
                 <div class="footer-col">
                     <h4>Gaming & Community</h4>
-                    <div style="margin-bottom: 15px;">
-                        <strong>Charitable Gaming</strong><br>
-                        <img src="shirleys-way.webp" alt="Shirley's Way Logo" style="max-width: 150px; margin: 8px 0; display: block;">
-                        <span style="font-size: 0.85rem; opacity: 0.8;">License #ORG0002527. Must be 18+ to play.</span>
+                    <div style="display: flex; gap: 20px; justify-content: space-between; margin-bottom: 15px;">
+                        <div style="flex: 1; text-align: center;">
+                            <strong>Charitable Gaming</strong><br>
+                            <img src="shirleys-way.webp" alt="Shirley's Way Logo" style="max-width: 120px; margin: 8px auto; display: block;">
+                            <span style="font-size: 0.75rem; opacity: 0.8; display: block;">License #ORG0002527. Must be 18+ to play.</span>
+                        </div>
+                        <div style="flex: 1; text-align: center;">
+                            <strong>Kentucky Lottery Keno</strong><br>
+                            <img src="keno.svg" alt="Kentucky Lottery Keno Logo" style="max-width: 120px; margin: 8px auto; display: block;">
+                            <span style="font-size: 0.75rem; opacity: 0.8; display: block;">Must be 18+ to purchase or play. Play Responsibly.</span>
+                        </div>
                     </div>
-                    <div style="margin-top: 15px;">
-                        <strong>Kentucky Lottery Keno</strong><br>
-                        <img src="keno.svg" alt="Kentucky Lottery Keno Logo" style="max-width: 150px; margin: 8px 0; display: block;">
-                        <span style="font-size: 0.85rem; opacity: 0.8;">Must be 18+ to purchase or play. Play Responsibly.</span><br>
+                    <div style="text-align: center;">
                         <span style="font-size: 0.85rem; color: #ffb3b3;">Gambling Problem? Call 1-800-GAMBLER.</span>
                     </div>
                 </div>
+                
+                <div class="footer-col">
+                    <h4>Hours</h4>
+                    <p>Mon–Sat: 11:00 AM – 4:00 AM</p>
+                    <p>Sun: 1:00 PM – 4:00 AM</p>
+                </div>
             </div>
 
-            <div class="map-container" style="margin-bottom: 20px;">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3137.649635760088!2d-85.61782292361668!3d38.148149891244365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88690b2716182e1b%3A0xe542c3359d95958!2sNew%20View%20Bar%20and%20Grill!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="200" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border:0;" title="Map location"></iframe>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3137.6619424976826!2d-85.61982442420558!3d38.14761597184521!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88690b2716182e1b%3A0xe542c3359d95958!2sNew%20View%20Bar%20and%20Grill!5e0!3m2!1sen!2sus!4v1733603872456!5m2!1sen!2sus" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="New View Bar & Grill - 7601 Outer Loop, Louisville, KY 40228"></iframe>
             </div>
 
             <div class="copyright">
