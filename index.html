@@ -1,3 +1,20 @@
+I haven't received the file attachment for the Keno logo yet, but I can write the code assuming you have it ready to go.
+
+To make the footer layout "make sense" with two different logos, I have cleaned up the design so they are stacked perfectly evenly. Instead of messy text, I created a **consistent layout** for both:
+
+1.  **Title** (Charitable Gaming / Keno)
+2.  **Logo** (The image)
+3.  **Legal Text** (License \#, Age, Gambling Hotline)
+
+### **Instructions:**
+
+1.  **Save your Keno logo:** Save the Keno logo file you have into your project folder.
+2.  **Rename it:** Name it **`keno-logo.png`**.
+3.  **Update code:** Copy the full code below.
+
+Here is the updated `index.html` with a polished footer layout:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -343,7 +360,6 @@
             font-size: 2.5rem;
             color: var(--primary-green);
             margin-bottom: 10px;
-            /* Flex removed so title is centered under image block */
         }
 
         /* The styles for the uploaded siren image */
@@ -355,7 +371,6 @@
             transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
             filter: drop-shadow(0 0 5px rgba(0,200,255,0.2));
             will-change: transform, filter;
-            /* constant flashing by default */
             animation: siren-flash 0.6s linear infinite;
         }
 
@@ -387,17 +402,13 @@
             }
         }
 
-        /* If user prefers reduced motion, disable the flashing animation */
         @media (prefers-reduced-motion: reduce) {
             .siren-feature {
                 animation: none !important;
                 transform: none !important;
                 filter: drop-shadow(0 0 5px rgba(0,200,255,0.2)) !important;
             }
-
-            *,
-            *::before,
-            *::after {
+            *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
@@ -743,6 +754,23 @@
             text-decoration: underline;
         }
 
+        /* New styles for footer logos to ensure they stack nicely */
+        .compliance-block {
+            margin-bottom: 25px;
+        }
+        .footer-logo {
+            max-width: 140px;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+        }
+        .compliance-text {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            line-height: 1.4;
+            display: block;
+        }
+
         .map-container {
             width: 100%;
             height: 200px;
@@ -803,7 +831,6 @@
             }
         }
 
-        /* Visually-hidden helper for live status but still accessible to screen readers */
         .visually-hidden {
             position: absolute !important;
             height: 1px; width: 1px;
@@ -906,19 +933,18 @@
         </section>
 
         <section id="about" class="section-padding" aria-labelledby="about-heading">
-        <div class="container about-content">
-    <h2 id="about-heading">Welcome Home</h2>
-    <p><strong>For more than 40 years, New View Bar & Grill has been a Highview staple — the kind of neighborhood spot that feels like home the second you walk in.</strong> We’re not trying to be a fancy gastropub or some corporate chain from out of town. We’re Louisville born and Louisville proud.</p>
-    <br>
-    <p>Locally owned and operated by Jamie, New View is built on the values this city knows best: treat people right, keep the drinks cold, and serve food that actually hits like a winner on Derby Day. Whether you’re a regular who claims the same seat every visit or a first-timer looking for a laid-back game of pool, you’re part of the family the moment you step inside.</p>
-</div>
-
+            <div class="container about-content">
+                <h2 id="about-heading">Welcome Home</h2>
+                <p><strong>For more than 40 years, New View Bar & Grill has been a Highview staple — the kind of neighborhood spot that feels like home the second you walk in.</strong> We’re not trying to be a fancy gastropub or some corporate chain from out of town. We’re Louisville born and Louisville proud.</p>
+                <br>
+                <p>Locally owned and operated by Jamie, New View is built on the values this city knows best: treat people right, keep the drinks cold, and serve food that actually hits like a winner on Derby Day. Whether you’re a regular who claims the same seat every visit or a first-timer looking for a laid-back game of pool, you’re part of the family the moment you step inside.</p>
+            </div>
         </section>
 
         <section id="menu" class="section-padding" aria-labelledby="menu-heading">
             <div class="container">
                 <h2 id="menu-heading">Food That Hits The Spot</h2>
-                <p class="menu-intro">Our kitchen stays open late (serving until close to 4 AM!) because we know good times don't stop at dinner time. We're known for generous portions, fair prices, and food that's better than your average bar fare.
+                <p class="menu-intro">Our kitchen stays open late (serving until close to 4 AM!) because we know good times don't stop at dinner time. We're known for generous portions, fair prices, and food that's better than your average bar fare.</p>
                 
                 <div class="menu-grid">
                     <article class="menu-category">
@@ -986,8 +1012,7 @@
             <div class="container">
                 <div class="cash-badge">CASH ONLY</div>
                 <h3 id="cash-heading">Keeping It Old School</h3>
-                <p style="max-width: 700px; margin: 0 auto;">To keep our prices fair, our portions huge, and our vibe authentic, New View is a cash-only establishment.
- <br><strong>Don't worry—we have an ATM right on site.
+                <p style="max-width: 700px; margin: 0 auto;">To keep our prices fair, our portions huge, and our vibe authentic, New View is a cash-only establishment. <br><strong>Don't worry—we have an ATM right on site.</strong></p>
             </div>
         </section>
 
@@ -1037,15 +1062,30 @@
                     <p>Email: <a href="mailto:info@newviewbargrill.com">info@newviewbargrill.com</a></p>
                     <p><a href="#menu">See the Menu</a></p>
                 </div>
+                
+                <div class="footer-col">
+                    <h4>Gaming & Community</h4>
+                    
+                    <div class="compliance-block">
+                        <strong>Charitable Gaming</strong>
+                        <img src="shirleys-way.webp" alt="Shirley's Way Logo" class="footer-logo">
+                        <span class="compliance-text">Proud partner of Shirley's Way.<br>License #ORG0002527. Must be 18+ to play.</span>
+                    </div>
+
+                    <div class="compliance-block">
+                        <strong>Kentucky Lottery Keno</strong>
+                        <img src="keno-logo.png" alt="Kentucky Lottery Keno Logo" class="footer-logo">
+                        <span class="compliance-text">Must be 18+ to purchase or play.<br><span style="color: #ffb3b3;">Gambling Problem? Call 1-800-GAMBLER.</span></span>
+                    </div>
+                </div>
             </div>
 
             <div class="map-container" style="margin-bottom: 20px;">
-                <!-- Example embed; replace src with your actual Google Maps embed if available -->
-                <iframe src="https://www.google.com/maps?q=7601+Outer+Loop+Louisville+KY&output=embed" width="100%" height="200" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3137.649635760088!2d-85.61782292361668!3d38.148149891244365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88690b2716182e1b%3A0xe542c3359d95958!2sNew%20View%20Bar%20and%20Grill!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" width="100%" height="200" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="border:0;" title="Map location"></iframe>
             </div>
 
             <div class="copyright">
-                <p>&copy; <span id="year"></span> New View Bar & Grill. All rights reserved.</p>
+                <p>© <span id="year"></span> New View Bar & Grill. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -1055,11 +1095,13 @@
         (function() {
             var toggle = document.querySelector('.menu-toggle');
             var nav = document.querySelector('nav');
-            toggle.addEventListener('click', function () {
-                var expanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', (!expanded).toString());
-                nav.classList.toggle('active');
-            });
+            if (toggle && nav) {
+                toggle.addEventListener('click', function () {
+                    var expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', (!expanded).toString());
+                    nav.classList.toggle('active');
+                });
+            }
         })();
 
         // Footer year
@@ -1071,3 +1113,4 @@
     </script>
 </body>
 </html>
+```
