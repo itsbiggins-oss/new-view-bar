@@ -1,20 +1,3 @@
-I haven't received the file attachment for the Keno logo yet, but I can write the code assuming you have it ready to go.
-
-To make the footer layout "make sense" with two different logos, I have cleaned up the design so they are stacked perfectly evenly. Instead of messy text, I created a **consistent layout** for both:
-
-1.  **Title** (Charitable Gaming / Keno)
-2.  **Logo** (The image)
-3.  **Legal Text** (License \#, Age, Gambling Hotline)
-
-### **Instructions:**
-
-1.  **Save your Keno logo:** Save the Keno logo file you have into your project folder.
-2.  **Rename it:** Name it **`keno-logo.png`**.
-3.  **Update code:** Copy the full code below.
-
-Here is the updated `index.html` with a polished footer layout:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -754,23 +737,6 @@ Here is the updated `index.html` with a polished footer layout:
             text-decoration: underline;
         }
 
-        /* New styles for footer logos to ensure they stack nicely */
-        .compliance-block {
-            margin-bottom: 25px;
-        }
-        .footer-logo {
-            max-width: 140px;
-            height: auto;
-            display: block;
-            margin: 10px 0;
-        }
-        .compliance-text {
-            font-size: 0.85rem;
-            opacity: 0.8;
-            line-height: 1.4;
-            display: block;
-        }
-
         .map-container {
             width: 100%;
             height: 200px;
@@ -935,9 +901,9 @@ Here is the updated `index.html` with a polished footer layout:
         <section id="about" class="section-padding" aria-labelledby="about-heading">
             <div class="container about-content">
                 <h2 id="about-heading">Welcome Home</h2>
-                <p><strong>For more than 40 years, New View Bar & Grill has been a Highview staple — the kind of neighborhood spot that feels like home the second you walk in.</strong> We’re not trying to be a fancy gastropub or some corporate chain from out of town. We’re Louisville born and Louisville proud.</p>
+                <p><strong>For more than 40 years, New View Bar & Grill has been a Highview staple — the kind of neighborhood spot that feels like home the second you walk in.</strong> We're not trying to be a fancy gastropub or some corporate chain from out of town. We're Louisville born and Louisville proud.</p>
                 <br>
-                <p>Locally owned and operated by Jamie, New View is built on the values this city knows best: treat people right, keep the drinks cold, and serve food that actually hits like a winner on Derby Day. Whether you’re a regular who claims the same seat every visit or a first-timer looking for a laid-back game of pool, you’re part of the family the moment you step inside.</p>
+                <p>Locally owned and operated by Jamie, New View is built on the values this city knows best: treat people right, keep the drinks cold, and serve food that actually hits like a winner on Derby Day. Whether you're a regular who claims the same seat every visit or a first-timer looking for a laid-back game of pool, you're part of the family the moment you step inside.</p>
             </div>
         </section>
 
@@ -1065,17 +1031,16 @@ Here is the updated `index.html` with a polished footer layout:
                 
                 <div class="footer-col">
                     <h4>Gaming & Community</h4>
-                    
-                    <div class="compliance-block">
-                        <strong>Charitable Gaming</strong>
-                        <img src="shirleys-way.webp" alt="Shirley's Way Logo" class="footer-logo">
-                        <span class="compliance-text">Proud partner of Shirley's Way.<br>License #ORG0002527. Must be 18+ to play.</span>
+                    <div style="margin-bottom: 15px;">
+                        <strong>Charitable Gaming</strong><br>
+                        <img src="shirleys-way.webp" alt="Shirley's Way Logo" style="max-width: 150px; margin: 8px 0; display: block;">
+                        <span style="font-size: 0.85rem; opacity: 0.8;">License #ORG0002527. Must be 18+ to play.</span>
                     </div>
-
-                    <div class="compliance-block">
-                        <strong>Kentucky Lottery Keno</strong>
-                        <img src="keno-logo.png" alt="Kentucky Lottery Keno Logo" class="footer-logo">
-                        <span class="compliance-text">Must be 18+ to purchase or play.<br><span style="color: #ffb3b3;">Gambling Problem? Call 1-800-GAMBLER.</span></span>
+                    <div style="margin-top: 15px;">
+                        <strong>Kentucky Lottery Keno</strong><br>
+                        <img src="keno.svg" alt="Kentucky Lottery Keno Logo" style="max-width: 150px; margin: 8px 0; display: block;">
+                        <span style="font-size: 0.85rem; opacity: 0.8;">Must be 18+ to purchase or play. Play Responsibly.</span><br>
+                        <span style="font-size: 0.85rem; color: #ffb3b3;">Gambling Problem? Call 1-800-GAMBLER.</span>
                     </div>
                 </div>
             </div>
@@ -1113,4 +1078,3 @@ Here is the updated `index.html` with a polished footer layout:
     </script>
 </body>
 </html>
-```
