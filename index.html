@@ -350,7 +350,7 @@
             width: 150px;
             height: auto;
             display: block;
-            margin: 0 auto 10px; /* Centers the image */
+            margin: 0 auto 10px;
             transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
             filter: drop-shadow(0 0 5px rgba(0,200,255,0.2));
             will-change: transform, filter;
@@ -398,26 +398,78 @@
             }
         }
 
+        /* UPDATED RULES SECTION - EASIER TO READ */
         .special-rules {
-            background-color: var(--bg-cream);
-            border: 2px dashed var(--primary-green);
-            padding: 20px;
+            background-color: var(--primary-green);
+            border: 3px solid var(--accent-gold);
+            padding: 40px 30px;
             border-radius: 8px;
-            display: inline-block;
-            margin-bottom: 40px;
-            min-width: 260px;
+            margin: 0 auto 40px;
+            max-width: 900px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .special-rules h3 {
-            font-size: 1.2rem;
+            font-size: 1.8rem;
             color: var(--accent-gold);
-            margin-bottom: 5px;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: bold;
         }
 
-        .special-rules p {
-            font-weight: 600;
-            color: var(--text-dark);
-            font-size: 1.1rem;
+        .schedule {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .schedule-header {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .time-slots {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .time-slot {
+            background: rgba(197, 160, 89, 0.2);
+            padding: 15px 25px;
+            border-radius: 6px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border: 2px solid var(--accent-gold);
+            color: #ffffff;
+            min-width: 140px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .time-slot:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
+        }
+
+        .availability {
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #ffffff;
+        }
+
+        .availability strong {
+            color: var(--accent-gold);
+            font-size: 1.25rem;
         }
 
         .special-grid {
@@ -789,8 +841,24 @@
 
             .special-title {
                 font-size: 1.8rem;
+            }
+
+            .special-rules {
+                padding: 25px 20px;
+            }
+
+            .special-rules h3 {
+                font-size: 1.4rem;
+            }
+
+            .time-slots {
                 flex-direction: column;
-                gap: 5px;
+                align-items: center;
+            }
+
+            .time-slot {
+                width: 100%;
+                max-width: 220px;
             }
 
             .special-grid {
@@ -882,13 +950,26 @@
                     <h2 id="bluelight-heading" class="special-title">
                         The Famous Blue Light Special
                     </h2>
-                    <p>When the light spins, the prices drop. You have to be quick!</p>
+                    <p>When the light spins, the prices drop!</p>
                 </div>
 
                 <div class="special-rules" aria-live="polite" aria-atomic="true">
                     <h3>The Rules</h3>
-                    <p id="special-rules-text">For 9 minutes every hour. Start times: 2:15 PM • 3:15 PM • 4:15 PM • 5:15 PM. Available Monday–Friday.</p>
-                    <p style="text-align: center;">Weekends: ask about our bucket specials.</p>
+                    
+                    <div class="schedule">
+                        <div class="schedule-header">9 Minutes | Starting at :15 Past the Hour</div>
+                        <div class="time-slots">
+                            <div class="time-slot">2:15 PM</div>
+                            <div class="time-slot">3:15 PM</div>
+                            <div class="time-slot">4:15 PM</div>
+                            <div class="time-slot">5:15 PM</div>
+                        </div>
+                    </div>
+
+                    <div class="availability">
+                        <strong>Monday - Friday</strong><br>
+                        Weekends? Ask about our bucket specials!
+                    </div>
                     <div id="bluelight-status" class="visually-hidden" role="status" aria-live="polite">Blue Light flashing continuously.</div>
                 </div>
                 
