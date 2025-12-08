@@ -768,7 +768,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             margin-bottom: 30px;
         }
@@ -787,21 +787,6 @@
         .footer-col a:hover {
             color: var(--accent-gold);
             text-decoration: underline;
-        }
-
-        /* Center the Hours column specifically */
-        .footer-hours {
-            text-align: center;
-        }
-
-        .footer-hours h4,
-        .footer-hours p {
-            text-align: center;
-        }
-
-        /* Center the Hours column if it happens to be last (extra safety) */
-        .footer-col:last-child {
-            text-align: center;
         }
 
         .map-container {
@@ -830,6 +815,12 @@
         /* =========================================
            12. RESPONSIVE ADJUSTMENTS
            ========================================= */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         @media (max-width: 768px) {
             .section-padding {
                 padding: 40px 0;
@@ -1119,6 +1110,12 @@
                     <p style="margin-top: 15px;">
                         <a href="https://www.facebook.com/newviewbargrill/" target="_blank" rel="noopener noreferrer">Find us on Facebook</a>
                     </p>
+                    
+                    <div style="margin-top: 25px;">
+                        <h4>Hours</h4>
+                        <p>Mon–Sat: 11:00 AM – 4:00 AM</p>
+                        <p>Sun: 1:00 PM – 4:00 AM</p>
+                    </div>
                 </div>
                 
                 <div class="footer-col">
@@ -1144,12 +1141,6 @@
                     <div style="text-align: center;">
                         <span style="font-size: 0.85rem; color: #ffb3b3;">Gambling Problem? Call 1-800-GAMBLER.</span>
                     </div>
-                </div>
-                
-                <div class="footer-col footer-hours">
-                    <h4>Hours</h4>
-                    <p>Mon–Sat: 11:00 AM – 4:00 AM</p>
-                    <p>Sun: 1:00 PM – 4:00 AM</p>
                 </div>
             </div>
 
@@ -1183,15 +1174,3 @@
                     this.setAttribute('aria-expanded', (!expanded).toString());
                     nav.classList.toggle('active');
                 });
-            }
-        })();
-
-        // Footer year
-        (function() {
-            var y = new Date().getFullYear();
-            var el = document.getElementById('year');
-            if (el) el.textContent = y;
-        })();
-    </script>
-</body>
-</html>
