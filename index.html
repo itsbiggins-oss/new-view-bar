@@ -741,7 +741,6 @@
         .review-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-            border-left-width: 6px;
         }
 
         .review-card p {
@@ -1164,13 +1163,40 @@
     </footer>
 
     <script>
-        // Menu toggle
+        // Menu toggle functionality
         (function() {
             var toggle = document.querySelector('.menu-toggle');
             var nav = document.querySelector('nav');
+            
             if (toggle && nav) {
-                toggle.addEventListener('click', function () {
+                // Toggle menu on button click
+                toggle.addEventListener('click', function() {
                     var expanded = this.getAttribute('aria-expanded') === 'true';
                     this.setAttribute('aria-expanded', (!expanded).toString());
                     nav.classList.toggle('active');
                 });
+
+                // Close menu when clicking a nav link
+                var navLinks = nav.querySelectorAll('a');
+                navLinks.forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        nav.classList.remove('active');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!nav.contains(e.target) && !toggle.contains(e.target) && nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                        toggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        })();
+
+        // Set copyright year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
