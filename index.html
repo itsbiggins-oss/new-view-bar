@@ -766,8 +766,8 @@
 
         .specials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
             max-width: 900px;
             margin: 0 auto;
         }
@@ -775,7 +775,7 @@
         .special-card-daily {
             background: white;
             border-radius: 8px;
-            padding: 25px;
+            padding: 20px 25px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             border-left: 4px solid var(--accent-gold);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -786,30 +786,39 @@
             box-shadow: 0 6px 16px rgba(0,0,0,0.15);
         }
 
+        .special-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
         .special-card-daily .special-name {
             font-family: var(--font-heading);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: var(--primary-green);
-            margin-bottom: 8px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+
+        .special-card-daily .special-price-tag {
+            background: var(--primary-green);
+            color: var(--accent-gold);
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .special-card-daily .special-description {
             color: var(--text-grey);
             font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        .special-card-daily .special-price-tag {
-            display: inline-block;
-            background: var(--primary-green);
-            color: var(--accent-gold);
-            font-family: var(--font-heading);
-            font-size: 1.4rem;
-            font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 4px;
+            line-height: 1.5;
         }
 
         .specials-loading {
@@ -841,6 +850,18 @@
             font-size: 0.85rem;
             margin-top: 20px;
             font-style: italic;
+        }
+
+        @media (max-width: 480px) {
+            .special-card-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .special-card-daily .special-price-tag {
+                align-self: flex-start;
+            }
         }
 
         /* =========================================
@@ -1529,9 +1550,7 @@
         // DAILY SPECIALS - Google Sheets Integration
         // ==========================================
         (function() {
-            // CONFIGURATION - Replace with your Google Sheet ID
-            // To get this: Open your Google Sheet > File > Share > Publish to web
-            // The ID is in the URL: https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit
+            // CONFIGURATION - Your Google Sheet ID
             var SHEET_ID = '1JQcz-HNK3azxJi25SfhwXKmUtHQBSo2SJEnRwhRifug';
             
             // Sheet name (tab name at bottom of spreadsheet)
@@ -1546,41 +1565,38 @@
                 return;
             }
             
-            // Build the URL to fetch data
+            // Use CSV export URL (more reliable for public sheets)
             var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + 
-                      '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(SHEET_NAME);
+                      '/export?format=csv&gid=0';
 
             // Fetch and display specials
             function loadSpecials() {
                 fetch(url)
                     .then(function(response) {
+                        if (!response.ok) {
+                            throw new Error('Sheet not accessible. Make sure it is shared publicly.');
+                        }
                         return response.text();
                     })
-                    .then(function(text) {
-                        // Google returns JSON wrapped in a function call, so we need to extract it
-                        var jsonString = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?/);
-                        if (!jsonString || !jsonString[1]) {
-                            throw new Error('Could not parse response');
-                        }
+                    .then(function(csvText) {
+                        // Parse CSV
+                        var rows = parseCSV(csvText);
                         
-                        var data = JSON.parse(jsonString[1]);
-                        var rows = data.table.rows;
-                        
-                        // Filter to only show items where "Show" column is TRUE/YES
+                        // Skip header row, filter to only show items where "Show" column is TRUE
                         var specials = [];
-                        rows.forEach(function(row) {
-                            if (row.c && row.c[0] && row.c[3]) {
-                                // Check if "Show" column (index 3) is true
-                                var showValue = row.c[3].v;
-                                if (showValue === true || showValue === 'TRUE' || showValue === 'Yes' || showValue === 'YES') {
+                        for (var i = 1; i < rows.length; i++) {
+                            var row = rows[i];
+                            if (row.length >= 4) {
+                                var showValue = row[3].trim().toUpperCase();
+                                if (showValue === 'TRUE' || showValue === 'YES') {
                                     specials.push({
-                                        name: row.c[0] ? row.c[0].v : '',
-                                        description: row.c[1] ? row.c[1].v : '',
-                                        price: row.c[2] ? row.c[2].v : ''
+                                        name: row[0] ? row[0].trim() : '',
+                                        description: row[1] ? row[1].trim() : '',
+                                        price: row[2] ? row[2].trim() : ''
                                     });
                                 }
                             }
-                        });
+                        }
 
                         // Render the specials
                         if (specials.length === 0) {
@@ -1588,15 +1604,19 @@
                         } else {
                             var html = '';
                             specials.forEach(function(special) {
-                                html += '<div class="special-card-daily">';
-                                html += '<div class="special-name">' + escapeHtml(special.name) + '</div>';
-                                if (special.description) {
-                                    html += '<div class="special-description">' + escapeHtml(special.description) + '</div>';
+                                if (special.name) {
+                                    html += '<div class="special-card-daily">';
+                                    html += '<div class="special-card-header">';
+                                    html += '<div class="special-name">' + escapeHtml(special.name) + '</div>';
+                                    if (special.price) {
+                                        html += '<div class="special-price-tag">$' + escapeHtml(special.price) + '</div>';
+                                    }
+                                    html += '</div>';
+                                    if (special.description) {
+                                        html += '<div class="special-description">' + escapeHtml(special.description) + '</div>';
+                                    }
+                                    html += '</div>';
                                 }
-                                if (special.price) {
-                                    html += '<div class="special-price-tag">$' + escapeHtml(special.price) + '</div>';
-                                }
-                                html += '</div>';
                             });
                             container.innerHTML = html;
                         }
@@ -1609,6 +1629,39 @@
                         console.error('Error loading specials:', error);
                         container.innerHTML = '<div class="specials-error">Unable to load today\'s specials. Please check back later!</div>';
                     });
+            }
+
+            // Simple CSV parser
+            function parseCSV(text) {
+                var rows = [];
+                var lines = text.split('\n');
+                
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i].trim();
+                    if (line) {
+                        // Handle quoted values with commas inside
+                        var row = [];
+                        var inQuotes = false;
+                        var value = '';
+                        
+                        for (var j = 0; j < line.length; j++) {
+                            var char = line[j];
+                            
+                            if (char === '"') {
+                                inQuotes = !inQuotes;
+                            } else if (char === ',' && !inQuotes) {
+                                row.push(value);
+                                value = '';
+                            } else {
+                                value += char;
+                            }
+                        }
+                        row.push(value); // Push last value
+                        rows.push(row);
+                    }
+                }
+                
+                return rows;
             }
 
             // Helper to prevent XSS
