@@ -13,7 +13,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&family=Pacifico&family=Architects+Daughter&family=Caveat:wght@500;700&family=Patrick+Hand&display=swap" rel="stylesheet">
 
     <script type="application/ld+json">
     {
@@ -66,6 +66,16 @@
             
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Open Sans', sans-serif;
+
+            /* Chalkboard colors */
+            --chalk-white: #e8e5dc;
+            --chalk-yellow: #f4d35e;
+            --chalk-pink: #e07a8d;
+            --chalk-blue: #4db8ff;
+            --chalk-green: #6ab547;
+            --chalk-red: #c44536;
+            --board-dark: #2a2f32;
+            --wood-dark: #3d2b1f;
         }
 
         * {
@@ -320,209 +330,417 @@
         }
 
         /* =========================================
-           5. BLUE LIGHT SPECIAL (WITH IMAGE)
+           5. BLUE LIGHT SPECIAL - CHALKBOARD STYLE
            ========================================= */
         #bluelight {
-            background-color: white; 
-            padding: 60px 0;
-            border-top: 2px solid var(--accent-gold);
-            border-bottom: 2px solid var(--accent-gold);
+            padding: 40px 20px;
+            background: var(--bg-cream);
         }
 
-        .special-container {
-            max-width: 1000px;
+        /* WOODEN FRAME */
+        .chalkboard-frame {
+            background: linear-gradient(180deg, 
+                #4a3728 0%, 
+                #3d2b1f 20%, 
+                #2e1f15 50%,
+                #3d2b1f 80%,
+                #4a3728 100%
+            );
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.5),
+                inset 0 1px 1px rgba(255,255,255,0.1),
+                inset 0 -1px 1px rgba(0,0,0,0.3);
+            max-width: 900px;
             margin: 0 auto;
+            position: relative;
+        }
+
+        .chalkboard-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                95deg,
+                transparent,
+                transparent 1px,
+                rgba(0,0,0,0.05) 1px,
+                rgba(0,0,0,0.05) 2px
+            );
+            border-radius: 6px;
+            pointer-events: none;
+        }
+
+        .frame-inner {
+            background: linear-gradient(180deg, #2a1c12 0%, #1a110a 100%);
+            padding: 6px;
+            border-radius: 3px;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);
+        }
+
+        /* THE CHALKBOARD */
+        .chalkboard {
+            background: 
+                radial-gradient(ellipse at 30% 30%, rgba(50,58,62,0.5) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 70%, rgba(45,52,56,0.4) 0%, transparent 50%),
+                linear-gradient(180deg, #323a3e 0%, #2a2f32 50%, #242a2d 100%);
+            padding: 40px 50px;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
             text-align: center;
         }
 
-        .special-header {
-            margin-bottom: 40px;
+        .chalkboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
         }
 
-        .special-title {
-            font-size: 2.5rem;
-            color: var(--primary-green);
-            margin-bottom: 10px;
+        /* SIREN WITH RAYS */
+        .siren-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 5px;
         }
 
-        /* The styles for the uploaded siren image */
-        .siren-feature {
-            width: 150px;
+        .siren-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140px;
+            height: 140px;
+        }
+
+        .siren-rays::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-conic-gradient(
+                    from 0deg,
+                    transparent 0deg 10deg,
+                    rgba(77, 184, 255, 0.2) 10deg 20deg
+                );
+            border-radius: 50%;
+            animation: ray-spin 8s linear infinite;
+        }
+
+        @keyframes ray-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .siren-icon {
+            position: relative;
+            z-index: 2;
+            width: 100px;
             height: auto;
-            display: block;
-            margin: 0 auto 10px;
-            transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
-            filter: drop-shadow(0 0 5px rgba(0,200,255,0.2));
-            will-change: transform, filter;
-            animation: siren-flash 0.6s linear infinite;
         }
 
-        @keyframes siren-flash {
-            0% {
-                transform: scale(1.0) rotate(-2deg);
-                filter: drop-shadow(0 0 6px rgba(0,200,255,0.35)) brightness(0.95);
-                opacity: 0.95;
+        .siren-icon img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(77, 184, 255, 0.8))
+                    drop-shadow(0 0 40px rgba(77, 184, 255, 0.4));
+            animation: siren-glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes siren-glow {
+            from { 
+                filter: drop-shadow(0 0 15px rgba(77, 184, 255, 0.6))
+                        drop-shadow(0 0 30px rgba(77, 184, 255, 0.3));
             }
-            25% {
-                transform: scale(1.06) rotate(-5deg);
-                filter: drop-shadow(0 0 18px rgba(0,200,255,0.7));
-                opacity: 1;
+            to { 
+                filter: drop-shadow(0 0 25px rgba(77, 184, 255, 1))
+                        drop-shadow(0 0 50px rgba(77, 184, 255, 0.6));
             }
-            50% {
-                transform: scale(1.02) rotate(2deg);
-                filter: drop-shadow(0 0 12px rgba(0,200,255,0.6));
-                opacity: 0.98;
+        }
+
+        /* HEADER */
+        .chalk-main-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.2rem;
+            color: var(--chalk-white);
+            margin: 10px 0;
+            text-shadow: 
+                2px 2px 0 rgba(0,0,0,0.3),
+                0 0 30px rgba(255,255,255,0.1);
+            letter-spacing: 2px;
+            text-transform: none;
+        }
+
+        .chalk-tagline {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: var(--chalk-white);
+            font-style: italic;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        /* RULES SECTION */
+        .chalk-rules-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .chalk-rules-label {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            color: var(--chalk-white);
+            font-weight: 700;
+        }
+
+        .chalk-rules-box {
+            background: transparent;
+            border: 3px solid var(--chalk-yellow);
+            padding: 8px 25px;
+            color: var(--chalk-yellow);
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3rem;
+            display: inline-block;
+        }
+
+        .chalk-rules-box strong {
+            font-weight: 700;
+        }
+
+        /* TIME SLOTS ROW */
+        .chalk-time-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chalk-daily-label {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.4rem;
+            color: var(--chalk-pink);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .chalk-time-slot {
+            background: transparent;
+            border: 2px solid var(--chalk-white);
+            color: var(--chalk-white);
+            padding: 8px 18px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            font-weight: 700;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        /* AVAILABILITY ROW */
+        .chalk-availability-row {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 15px 0 30px;
+            flex-wrap: wrap;
+        }
+
+        .chalk-availability-item {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.1rem;
+            color: var(--chalk-white);
+        }
+
+        .chalk-availability-item .highlight {
+            color: var(--chalk-pink);
+        }
+
+        /* DIVIDER */
+        .chalk-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+            color: var(--chalk-white);
+            font-family: 'Architects Daughter', cursive;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+        }
+
+        .chalk-divider-line {
+            width: 60px;
+            height: 2px;
+            background: var(--chalk-white);
+            opacity: 0.6;
+        }
+
+        /* SPECIALS GRID */
+        .chalk-specials-grid {
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .chalk-special-item {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .chalk-special-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 4px solid;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .chalk-special-circle.green { border-color: var(--chalk-green); }
+        .chalk-special-circle.red { border-color: var(--chalk-red); }
+        .chalk-special-circle.pink { border-color: var(--chalk-pink); }
+
+        .chalk-special-price {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--chalk-white);
+            line-height: 1;
+        }
+
+        .chalk-special-price .off {
+            font-size: 1rem;
+            vertical-align: middle;
+        }
+
+        .chalk-special-name {
+            font-family: 'Patrick Hand', cursive;
+            color: var(--chalk-white);
+            font-size: 1.1rem;
+            margin-top: 5px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .chalk-special-desc {
+            font-family: 'Patrick Hand', cursive;
+            color: rgba(232, 229, 220, 0.7);
+            font-size: 0.85rem;
+        }
+
+        /* STARBURST for Specialty Shots */
+        .chalk-starburst {
+            width: 140px;
+            height: 140px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chalk-starburst-shape {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--chalk-yellow);
+            clip-path: polygon(
+                50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 
+                50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+            );
+            opacity: 0.9;
+        }
+
+        .chalk-starburst-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .chalk-starburst-content .chalk-special-name {
+            color: #2a2f32;
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        /* Responsive for chalkboard */
+        @media (max-width: 700px) {
+            .chalkboard {
+                padding: 30px 20px;
             }
-            75% {
-                transform: scale(1.06) rotate(-4deg);
-                filter: drop-shadow(0 0 20px rgba(0,200,255,0.85));
-                opacity: 1;
+            .chalk-main-title {
+                font-size: 2.2rem;
             }
-            100% {
-                transform: scale(1.0) rotate(-2deg);
-                filter: drop-shadow(0 0 6px rgba(0,200,255,0.35));
-                opacity: 0.95;
+            .chalk-rules-row {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .chalk-time-row {
+                gap: 10px;
+            }
+            .chalk-time-slot {
+                padding: 6px 12px;
+                font-size: 1.3rem;
+            }
+            .chalk-specials-grid {
+                gap: 15px;
+            }
+            .chalk-special-item {
+                width: 130px;
+                height: 130px;
+            }
+            .chalk-special-circle {
+                width: 110px;
+                height: 110px;
+            }
+            .chalk-starburst {
+                width: 120px;
+                height: 120px;
+            }
+            .chalk-availability-row {
+                gap: 20px;
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .siren-feature {
+            .siren-rays::before,
+            .siren-icon img {
                 animation: none !important;
-                transform: none !important;
-                filter: drop-shadow(0 0 5px rgba(0,200,255,0.2)) !important;
             }
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
-        }
-
-        /* UPDATED RULES SECTION - EASIER TO READ */
-        .special-rules {
-            background-color: var(--primary-green);
-            border: 3px solid var(--accent-gold);
-            padding: 40px 30px;
-            border-radius: 8px;
-            margin: 0 auto 40px;
-            max-width: 900px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .special-rules h3 {
-            font-size: 1.8rem;
-            color: var(--accent-gold);
-            text-align: center;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            font-weight: bold;
-        }
-
-        .schedule {
-            background: rgba(255,255,255,0.1);
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-        }
-
-        .schedule-header {
-            font-size: 1.4rem;
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .time-slots {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .time-slot {
-            background: rgba(197, 160, 89, 0.2);
-            padding: 15px 25px;
-            border-radius: 6px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            border: 2px solid var(--accent-gold);
-            color: #ffffff;
-            min-width: 140px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .time-slot:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
-        }
-
-        .availability {
-            text-align: center;
-            font-size: 1.15rem;
-            line-height: 1.8;
-            color: #ffffff;
-        }
-
-        .availability strong {
-            color: var(--accent-gold);
-            font-size: 1.25rem;
-        }
-
-        .special-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .special-card {
-            background-color: var(--primary-green);
-            color: var(--text-light);
-            padding: 25px;
-            border-radius: 8px;
-            border: 2px solid var(--primary-green);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .special-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background-color: var(--accent-gold);
-        }
-
-        .special-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-        }
-
-        .special-price {
-            font-family: var(--font-heading);
-            font-size: 3rem;
-            color: var(--accent-gold);
-            line-height: 1;
-            margin-bottom: 5px;
-        }
-
-        .special-item {
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-        }
-
-        .special-sub {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            font-style: italic;
         }
 
         /* =========================================
@@ -829,36 +1047,6 @@
                 font-size: 1.8rem;
             }
 
-            .special-title {
-                font-size: 1.8rem;
-            }
-
-            .special-rules {
-                padding: 25px 20px;
-            }
-
-            .special-rules h3 {
-                font-size: 1.4rem;
-            }
-
-            .time-slots {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .time-slot {
-                width: 100%;
-                max-width: 220px;
-            }
-
-            .special-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .special-card {
-                padding: 15px;
-            }
-
             .menu-grid,
             .features-grid,
             .review-grid {
@@ -932,63 +1120,87 @@
         </section>
 
         <section id="bluelight" aria-labelledby="bluelight-heading">
-            <div class="container special-container">
-                
-                <div class="special-header">
-                    <img id="siren" src="blue-light.png" alt="Blue Light Special Siren" class="siren-feature" aria-hidden="true">
-                    
-                    <h2 id="bluelight-heading" class="special-title">
-                        The Famous Blue Light Special
-                    </h2>
-                    <p>When the light spins, the prices drop!</p>
-                </div>
-
-                <div class="special-rules" aria-live="polite" aria-atomic="true">
-                    <h3>The Rules</h3>
-                    
-                    <div class="schedule">
-                        <div class="schedule-header">9 Minutes | Starting at :15 Past the Hour</div>
-                        <div class="time-slots">
-                            <div class="time-slot">2:15 PM</div>
-                            <div class="time-slot">3:15 PM</div>
-                            <div class="time-slot">4:15 PM</div>
-                            <div class="time-slot">5:15 PM</div>
+            <div class="chalkboard-frame">
+                <div class="frame-inner">
+                    <div class="chalkboard">
+                        
+                        <!-- SIREN -->
+                        <div class="siren-container">
+                            <div class="siren-rays"></div>
+                            <div class="siren-icon">
+                                <img src="blue-light.png" alt="Blue Light Special">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="availability">
-                        <strong>Monday - Friday</strong><br>
-                        Weekends? Ask about our bucket specials!
-                    </div>
-                    <div id="bluelight-status" class="visually-hidden" role="status" aria-live="polite">Blue Light flashing continuously.</div>
-                </div>
-                
-                <div class="special-grid">
-                    <div class="special-card">
-                        <div class="special-price">$1.00</div>
-                        <div class="special-item">Off</div>
-                        <div class="special-sub">Well Drinks</div>
-                    </div>
-                    
-                    <div class="special-card">
-                        <div class="special-price">$2.00</div>
-                        <div class="special-item">Domestics</div>
-                        <div class="special-sub">Bottles + Cans</div>
-                    </div>
-                    
-                    <div class="special-card">
-                        <div class="special-price">$3.50</div>
-                        <div class="special-item">Craft</div>
-                        <div class="special-sub">Bottles + Cans</div>
-                    </div>
-                    
-                    <div class="special-card">
-                        <div class="special-price">💥</div>
-                        <div class="special-item">Specialty</div>
-                        <div class="special-sub">Shots</div>
-                    </div>
-                </div>
+                        <!-- HEADER -->
+                        <h2 id="bluelight-heading" class="chalk-main-title">Blue Light Special</h2>
+                        <p class="chalk-tagline">When the light spins, the prices drop!</p>
 
+                        <!-- RULES -->
+                        <div class="chalk-rules-row">
+                            <span class="chalk-rules-label">The Rules</span>
+                            <div class="chalk-rules-box">
+                                <strong>9 Minutes</strong> • Starting at <strong>:15</strong> Past the Hour
+                            </div>
+                        </div>
+
+                        <!-- TIME SLOTS -->
+                        <div class="chalk-time-row">
+                            <span class="chalk-daily-label">DAILY</span>
+                            <div class="chalk-time-slot">2:15</div>
+                            <div class="chalk-time-slot">3:15</div>
+                            <div class="chalk-time-slot">4:15</div>
+                            <div class="chalk-time-slot">5:15</div>
+                        </div>
+
+                        <!-- AVAILABILITY -->
+                        <div class="chalk-availability-row">
+                            <span class="chalk-availability-item">* Monday – Friday</span>
+                            <span class="chalk-availability-item">* Weekends <span class="highlight">bucket specials</span></span>
+                        </div>
+
+                        <!-- DIVIDER -->
+                        <div class="chalk-divider">
+                            <span class="chalk-divider-line"></span>
+                            <span>WHEN THE LIGHT'S ON</span>
+                            <span class="chalk-divider-line"></span>
+                        </div>
+
+                        <!-- SPECIALS -->
+                        <div class="chalk-specials-grid">
+                            <div class="chalk-special-item">
+                                <div class="chalk-special-circle green">
+                                    <div class="chalk-special-price">$1 <span class="off">OFF</span></div>
+                                    <div class="chalk-special-name">Well Drinks</div>
+                                </div>
+                            </div>
+                            <div class="chalk-special-item">
+                                <div class="chalk-special-circle red">
+                                    <div class="chalk-special-price">$2</div>
+                                    <div class="chalk-special-name">Domestics</div>
+                                    <div class="chalk-special-desc">Bottles + Cans</div>
+                                </div>
+                            </div>
+                            <div class="chalk-special-item">
+                                <div class="chalk-special-circle pink">
+                                    <div class="chalk-special-price">$3<sup>.50</sup></div>
+                                    <div class="chalk-special-name">Craft</div>
+                                    <div class="chalk-special-desc">Bottles + Cans</div>
+                                </div>
+                            </div>
+                            <div class="chalk-special-item">
+                                <div class="chalk-starburst">
+                                    <div class="chalk-starburst-shape"></div>
+                                    <div class="chalk-starburst-content">
+                                        <div class="chalk-special-name">Specialty<br>Shots</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="bluelight-status" class="visually-hidden" role="status" aria-live="polite">Blue Light flashing continuously.</div>
+                    </div>
+                </div>
             </div>
         </section>
 
