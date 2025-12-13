@@ -744,7 +744,107 @@
         }
 
         /* =========================================
-           6. ABOUT SECTION
+           6. DAILY SPECIALS SECTION
+           ========================================= */
+        #daily-specials {
+            background-color: var(--bg-cream);
+        }
+
+        #daily-specials h2 {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .specials-intro {
+            text-align: center;
+            color: var(--text-grey);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .specials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .special-card-daily {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--accent-gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .special-card-daily:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+        }
+
+        .special-card-daily .special-name {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            color: var(--primary-green);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .special-card-daily .special-description {
+            color: var(--text-grey);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .special-card-daily .special-price-tag {
+            display: inline-block;
+            background: var(--primary-green);
+            color: var(--accent-gold);
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 4px;
+        }
+
+        .specials-loading {
+            text-align: center;
+            color: var(--text-grey);
+            font-style: italic;
+            padding: 40px;
+            grid-column: 1 / -1;
+        }
+
+        .specials-error {
+            text-align: center;
+            color: #c44536;
+            padding: 40px;
+            grid-column: 1 / -1;
+        }
+
+        .specials-empty {
+            text-align: center;
+            color: var(--text-grey);
+            padding: 40px;
+            grid-column: 1 / -1;
+            font-style: italic;
+        }
+
+        .specials-updated-time {
+            text-align: center;
+            color: var(--text-grey);
+            font-size: 0.85rem;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* =========================================
+           7. ABOUT SECTION
            ========================================= */
         #about {
             background-color: white;
@@ -1090,6 +1190,7 @@
             <nav role="navigation" aria-label="Main navigation">
                 <ul>
                     <li><a href="#about">Our Story</a></li>
+                    <li><a href="#daily-specials">Daily Specials</a></li>
                     <li><a href="#menu">Food & Drink</a></li>
                     <li><a href="#nightlife">Karaoke & Pool</a></li>
                     <li><a href="#visit">Visit Us</a></li>
@@ -1201,6 +1302,20 @@
                         <div id="bluelight-status" class="visually-hidden" role="status" aria-live="polite">Blue Light flashing continuously.</div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="daily-specials" class="section-padding" aria-labelledby="specials-heading">
+            <div class="container">
+                <h2 id="specials-heading">Today's Lunch Specials</h2>
+                <p class="specials-intro">Fresh specials prepared daily by our kitchen. Served 11 AM – 3 PM.</p>
+                
+                <div id="specials-container" class="specials-grid">
+                    <!-- Specials loaded dynamically from Google Sheets -->
+                    <div class="specials-loading">Loading today's specials...</div>
+                </div>
+
+                <p id="specials-updated" class="specials-updated-time"></p>
             </div>
         </section>
 
@@ -1409,6 +1524,106 @@
 
         // Set copyright year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // ==========================================
+        // DAILY SPECIALS - Google Sheets Integration
+        // ==========================================
+        (function() {
+            // CONFIGURATION - Replace with your Google Sheet ID
+            // To get this: Open your Google Sheet > File > Share > Publish to web
+            // The ID is in the URL: https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit
+            var SHEET_ID = '1JQcz-HNK3azxJi25SfhwXKmUtHQBSo2SJEnRwhRifug';
+            
+            // Sheet name (tab name at bottom of spreadsheet)
+            var SHEET_NAME = 'Sheet1';
+
+            var container = document.getElementById('specials-container');
+            var updatedEl = document.getElementById('specials-updated');
+
+            // Check if Sheet ID has been configured
+            if (SHEET_ID === 'YOUR_GOOGLE_SHEET_ID_HERE') {
+                container.innerHTML = '<div class="specials-empty">Daily specials coming soon!</div>';
+                return;
+            }
+            
+            // Build the URL to fetch data
+            var url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + 
+                      '/gviz/tq?tqx=out:json&sheet=' + encodeURIComponent(SHEET_NAME);
+
+            // Fetch and display specials
+            function loadSpecials() {
+                fetch(url)
+                    .then(function(response) {
+                        return response.text();
+                    })
+                    .then(function(text) {
+                        // Google returns JSON wrapped in a function call, so we need to extract it
+                        var jsonString = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\);?/);
+                        if (!jsonString || !jsonString[1]) {
+                            throw new Error('Could not parse response');
+                        }
+                        
+                        var data = JSON.parse(jsonString[1]);
+                        var rows = data.table.rows;
+                        
+                        // Filter to only show items where "Show" column is TRUE/YES
+                        var specials = [];
+                        rows.forEach(function(row) {
+                            if (row.c && row.c[0] && row.c[3]) {
+                                // Check if "Show" column (index 3) is true
+                                var showValue = row.c[3].v;
+                                if (showValue === true || showValue === 'TRUE' || showValue === 'Yes' || showValue === 'YES') {
+                                    specials.push({
+                                        name: row.c[0] ? row.c[0].v : '',
+                                        description: row.c[1] ? row.c[1].v : '',
+                                        price: row.c[2] ? row.c[2].v : ''
+                                    });
+                                }
+                            }
+                        });
+
+                        // Render the specials
+                        if (specials.length === 0) {
+                            container.innerHTML = '<div class="specials-empty">No specials today — check back tomorrow!</div>';
+                        } else {
+                            var html = '';
+                            specials.forEach(function(special) {
+                                html += '<div class="special-card-daily">';
+                                html += '<div class="special-name">' + escapeHtml(special.name) + '</div>';
+                                if (special.description) {
+                                    html += '<div class="special-description">' + escapeHtml(special.description) + '</div>';
+                                }
+                                if (special.price) {
+                                    html += '<div class="special-price-tag">$' + escapeHtml(special.price) + '</div>';
+                                }
+                                html += '</div>';
+                            });
+                            container.innerHTML = html;
+                        }
+
+                        // Show last updated time
+                        var now = new Date();
+                        updatedEl.textContent = 'Last updated: ' + now.toLocaleTimeString([], {hour: 'numeric', minute: '2-digit'});
+                    })
+                    .catch(function(error) {
+                        console.error('Error loading specials:', error);
+                        container.innerHTML = '<div class="specials-error">Unable to load today\'s specials. Please check back later!</div>';
+                    });
+            }
+
+            // Helper to prevent XSS
+            function escapeHtml(text) {
+                var div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // Load specials on page load
+            loadSpecials();
+
+            // Refresh every 5 minutes (300000ms) in case specials are updated
+            setInterval(loadSpecials, 300000);
+        })();
     </script>
 </body>
 </html>
